@@ -1,0 +1,68 @@
+<script type="text/javascript">
+  RED.nodes.registerType("es search", {
+    category: "network",
+    color: "#00a79d",
+    defaults: {
+      name: { value: "" },
+      client: { value: "", type: "es client config" },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "icon.svg",
+    label: function () {
+      return this.name || "es search";
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="es search">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-client"><i class="fa fa-plug"></i> Client</label>
+    <input type="text" id="node-input-client" />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="es search">
+  <h1>es search</h1>
+  <p>The node creates a elasticsearch client and do search.</p>
+
+  <h3>Inputs</h3>
+  <dl class="message-properties">
+    <dt>payload<span class="property-type">string</span></dt>
+    <dd>a json string which is the search body.</dd>
+    <dt>index <span class="property-type">string</span></dt>
+    <dd>the elasticsearch index that search in.</dd>
+  </dl>
+
+  <h3>Outputs</h3>
+  <ol class="node-ports">
+    <li>
+      Standard output
+      <dl class="message-properties">
+        <dt>payload <span class="property-type">string</span></dt>
+        <dd>when the search success, payload is the result body.</dd>
+      </dl>
+    </li>
+    <li>
+      Standard error
+      <dl class="message-properties">
+        <dt>payload <span class="property-type">string</span></dt>
+        <dd>when the search failed, payload is the error message.</dd>
+      </dl>
+    </li>
+  </ol>
+
+  <h3>Details</h3>
+  <p>
+    <code>msg.payload</code> is used as the search body of elasticsearch. It
+    should be a correct JSON string.
+  </p>
+  <p>
+    The aiming index only from <code>msg.index</code>.
+  </p>
+</script>
